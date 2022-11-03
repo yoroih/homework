@@ -34,12 +34,13 @@ class Libro:
     libros = ["id","titulo","genero","isbn","editorial","autores"] #columnas del csv 
     
     def __init__(self):
-        self.__id = input("Ingrese ID: ")
-        self.__titulo = input("Ingresar el titulo del libro: ")
-        self.__genero = input("Ingrese genero del libro")
-        self.__isbn = input("Ingrese ISBN: ")
-        self.__editorial = input("Ingrese editorial: ")
-        self.__autores = input("Ingrese autores: ")  
+        pass
+        # self.__id = id
+        # self.__titulo = titulo
+        # self.__genero = genero
+        # self.__isbn = isbn
+        # self.__editorial = editorial
+        # self.__autores = autores
 
     def leer_archivo(self):
         datos = pd.read_csv("libros.csv")
@@ -52,6 +53,12 @@ class Libro:
     def agregar(self):    
         insert = True
         while insert:
+            self.__id = input("Ingrese ID: ")
+            self.__titulo = input("Ingresar el titulo del libro: ")
+            self.__genero = input("Ingrese genero del libro")
+            self.__isbn = input("Ingrese ISBN: ")
+            self.__editorial = input("Ingrese editorial: ")
+            self.__autores = input("Ingrese autores: ")          
             lib_datos = {"id":self.__id, "titulo":self.__titulo, "genero":self.__genero, "isbn":self.__isbn, "editorial":self.__editorial, "autores":self.__autores}
             with open ('libros.csv','a',newline='') as nueva_linea:
                 escribir = DictWriter(nueva_linea, fieldnames=self.libros)
@@ -61,8 +68,33 @@ class Libro:
             if (input("Registrar otro libro? S/N: ")).lower() == "n":
                 insert = False
                 
+    def buscar_isbn_titulo(self):
+        #Opción 5: Buscar libro por ISBN o por título. Se debe sugerir las opciones y listar el resultado.
+        opcion = "0"
+        while not(opcion == "3"):
+            print("\nElija una opción\n")
+            print("1. Buscar por ISBN")
+            print("2. Buscar por Título")
+            print("3. Salir\n")
+            
+            opcion = input("Ingresar opción: ")
+                    
+            if (opcion == "1"):
+                datos = pd.read_csv("libros.csv")
+                print(datos.iloc[:,[3]])
+                        
+            elif (opcion == "2"):
+                datos = pd.read_csv("libros.csv")
+                print(datos.iloc[:,[1]])
+            
+            elif (opcion == "3"):
+                break
+            else:
+                print("Ingrese una opción valida")       
+
+
 leer = Libro()
-leer.listar()
+leer.buscar_isbn_titulo()
         
 
 
