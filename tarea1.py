@@ -62,7 +62,7 @@ class Libro:
                 insert = False
                 
 leer = Libro()
-leer.agregar()
+leer.listar()
         
 
 
