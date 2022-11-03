@@ -31,9 +31,7 @@ print("BIBLIOTECA")
 
 class Libro:
     
-    headerCSV = ["id","titulo","genero","isbn","editorial","autores"] #columnas del csv
-    libros = {} #diccionario vacio
-    
+    libros = ["id","titulo","genero","isbn","editorial","autores"] #columnas del csv 
     
     def __init__(self):
         self.__id = input("Ingrese ID: ")
@@ -56,7 +54,7 @@ class Libro:
         while insert:
             lib_datos = {"id":self.__id, "titulo":self.__titulo, "genero":self.__genero, "isbn":self.__isbn, "editorial":self.__editorial, "autores":self.__autores}
             with open ('libros.csv','a',newline='') as nueva_linea:
-                escribir = DictWriter(nueva_linea, fieldnames=self.headerCSV)
+                escribir = DictWriter(nueva_linea, fieldnames=self.libros)
                 escribir.writerow(lib_datos)
                 nueva_linea.close()
             print()
