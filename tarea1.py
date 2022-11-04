@@ -23,6 +23,7 @@ Opción 10: Guardar libros en archivo de disco duro (.txt o csv).
 Nota: listar libros involucra: título, género, ISBN, editorial y autor(es)
 """
 import pandas as pd
+import csv
 from csv import DictWriter
 from os import system
 system("cls")
@@ -35,22 +36,50 @@ class Libro:
     
     def __init__(self):
         pass
-        # self.__id = id
-        # self.__titulo = titulo
-        # self.__genero = genero
-        # self.__isbn = isbn
-        # self.__editorial = editorial
-        # self.__autores = autores
-
+       
     def leer_archivo(self):
         datos = pd.read_csv("libros.csv")
-        print(datos.sort_values(by="id"))
+        #print(datos.sort_values(by="id"))
+        print(datos.iloc[0:3])
     
     def listar(self):
         datos = pd.read_csv("libros.csv")
         print(datos.iloc[:,[1,2,3,4,5]])
     
-    def agregar(self):    
+    def eliminar(self):
+       
+        datos = pd.read_csv("libros.csv")
+        print(datos)       
+        elim = int(input("\nIngrese id del libro que  desea eliminar: "))
+        datos.drop(inplace=True, index = (elim-1))
+        print(datos)
+    
+    def ultima_f(self):
+        pass
+        # datos = pd.read_csv("libros.csv")
+        # print(datos)
+        # elim = int(input("\nIngrese id del libro que  desea eliminar: "))
+        # datos.drop(datos.index[[elim-1]],inplace=True)
+        # a = dict(datos)
+        # print(a)
+        
+        # with open("libros.csv","w") as file:
+        #     writer = csv.writer(file, delimiter=",")
+        #     writer.writerow(list(a))
+        # print(datos)
+        
+        
+        
+        
+        
+        # with open("libros.csv", "w") as file:
+        #     writer = csv.writer(file)
+        #     writer.writerows(datos)
+        # print(datos)
+        
+        
+        
+    def guardar(self):    
         insert = True
         while insert:
             self.__id = input("Ingrese ID: ")
@@ -90,11 +119,26 @@ class Libro:
             elif (opcion == "3"):
                 break
             else:
-                print("Ingrese una opción valida")       
-
+                print("Ingrese una opción valida")
+        
+    def buscar_autores(self):
+        
+        num_autores = int(input("ingrese el numero de autores: "))
+        
+        datos = pd.read_csv("libros.csv")   
+        for i in datos["autores"]:
+            a = i.split(",")
+            #print(a)
+            if len(a) == 1 and num_autores == 1:
+                datos.drop(inplace=True, index = (1))
+                print(datos)   
+            
+            # elif len(a) == 2:
+            #     print("2 autores")
 
 leer = Libro()
-leer.buscar_isbn_titulo()
+leer.buscar_autores()
+
         
 
 
