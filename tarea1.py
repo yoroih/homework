@@ -53,6 +53,7 @@ class Libro:
         elim = int(input("\nIngrese id del libro que  desea eliminar: "))
         datos.drop(inplace=True, index = (elim-1))
         print(datos)
+        
     
     def ultima_f(self):
         pass
